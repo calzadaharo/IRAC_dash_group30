@@ -1,12 +1,10 @@
 <html>
     <head>
+        <meta charset="UTF-8">
         <title>
 			IRAC Práctica 3 DASH
 		</title>
-      
-
-    </head>
-    <body>
+        <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
         <script>
             var player;
             document.addEventListener("DOMContentLoaded", function () {
@@ -16,10 +14,11 @@
                 player = dashjs.MediaPlayerFactory.create( document.querySelector(".dashjsplayer"));
             };
         </script>
-
-        <h1>El video</h1>
+    </head>
+    <body>
+        <h1>El vídeo</h1>
         <video class="dashjs-player" autoplay controls preload="auto">
-            <source src="[MPD envivo]" type="application/dash+xml"/>
+            <source src="https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd" type="application/dash+xml"/>
         </video>
     </body>
 </html>
