@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>
+			IRAC Práctica 3 DASH
+		</title>
+      
+
+    </head>
+    <body>
+        <script>
+            var player;
+            document.addEventListener("DOMContentLoaded", function () {
+                init();
+            });
+            function init(){
+                player = dashjs.MediaPlayerFactory.create( document.querySelector(".dashjsplayer"));
+            };
+        </script>
+
+        <h1>El video</h1>
+        <video class="dashjs-player" autoplay controls preload="auto">
+            <source src="[MPD envivo]" type="application/dash+xml"/>
+        </video>
+    </body>
+</html>
