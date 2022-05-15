@@ -28,7 +28,6 @@
                 mpd_url = "./output/output/stream.mpd";
             video = document.querySelector("video");
             player = dashjs.MediaPlayer().create();
-            player.setProtectionData(protData);
             player.initialize(video, mpd_url, true);
             player.on(dashjs.MediaPlayer.events["PLAYBACK_ENDED"], function () {
                 clearInterval(eventPoller);
@@ -37,16 +36,9 @@
                 var streamInfo = player.getActiveStream().getStreamInfo();
                 var dashMetrics = player.getDashMetrics();
                 var dashAdapter = player.getDashAdapter();
+
                 if (dashMetrics && streamInfo) {
                     const periodIdx = streamInfo.index;
-                    
-                    var repSwitch = dashMetrics.getCurrentRepresentationSwitch('video', true);
-                    var adaptation = dashAdapter.getAdaptationForType(periodIdx, 'video', streamInfo);
-                    var currentRep = adaptation.Representation_asArray.find(function (rep) {
-                        return rep.id === repSwitch.to
-                    })
-                    var frameRate = currentRep.frameRate;
-                    var resolution = currentRep.width + 'x' + currentRep.height;
                     var repSwitch = dashMetrics.getCurrentRepresentationSwitch('video', true);
                     var bufferLevel = dashMetrics.getCurrentBufferLevel('video', true);
                     var bitrate = repSwitch ? Math.round(dashAdapter.
@@ -55,8 +47,6 @@
                     document.getElementById('buffer').innerText = bufferLevel + " secs";
                     document.getElementById('bitrate').innerText = bitrate + " Kbps";
                     document.getElementById('representation').innerText = repSwitch.to;
-                    document.getElementById('framerate').innerText = frameRate + " fps";
-                    document.getElementById('resolution').innerText = resolution + " ppi";
                 }
             }, 500);
         }        
@@ -66,15 +56,12 @@
 <body>
     <h1>El vídeo de IRAC :D</h1>
     <div class="code">
-        <video class="dashjs-player" autoplay controls preload="auto">
-        </video>
+        <video class="dashjs-player" autoplay controls preload="auto"></video>
     </div>
     <div class="code">
         <p>Video Bitrate: <span id="bitrate"></span> kbps</p>
         <p>Video Buffer: <span id="buffer"></span> seconds</p>
         <p>Video Representation: <span id="representation"></span></p>
-        <p>Framerate: <span id="framerate"></span></p>
-        <p>Resolution: <span id="resolution"></span></p>
     </div>
 </body>
 

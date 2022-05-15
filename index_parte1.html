@@ -1,0 +1,27 @@
+<html>
+    <header>
+        <meta charset="UTF-8">
+    <title>
+        IRAC Práctica 3 DASH 
+    </title>
+    <!--CDN incluido-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.3.0/dash.all.min.js" integrity="sha512-XySDxg2J8BFPCGF0ToToWEkPGqvg9as64sBRrelx17aITK+JKxBEG9fATs5F2H/d5OLZP4V3AULTeM4k14coGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var player;
+        document.addEventListener("DOMContentLoaded", function (){
+            init();
+        });
+
+        function init(){
+            player = dashjs.MediaPlayerFactory.create(document.querySelector(".dashjs-player"));
+        };
+    </script>
+    </header>
+    <body>
+        <h1>El vídeo</h1>
+        <video class="dashjs-player" autoplay="auto" controls preload="auto">
+            <source src="https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd" type="application/dash+xml"/>
+        </video>
+
+    </body>
+</html>
